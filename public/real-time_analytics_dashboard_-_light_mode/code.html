@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Real-time Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-[#233648] flex flex-col bg-white dark:bg-[#111a22] shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">insights</span>
+</div>
+<div>
+<h1 class="text-base font-bold leading-none">MetricFlow</h1>
+<p class="text-xs text-slate-500 dark:text-[#92adc9] mt-1">SaaS Manager</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-[#92adc9] hover:bg-slate-100 dark:hover:bg-[#233648] transition-colors rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">analytics</span>
+<p class="text-sm font-medium">Detailed Analytics</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-[#92adc9] hover:bg-slate-100 dark:hover:bg-[#233648] transition-colors rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">group</span>
+<p class="text-sm font-medium">Customers</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-[#92adc9] hover:bg-slate-100 dark:hover:bg-[#233648] transition-colors rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">payments</span>
+<p class="text-sm font-medium">Subscriptions</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-[#92adc9] hover:bg-slate-100 dark:hover:bg-[#233648] transition-colors rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">description</span>
+<p class="text-sm font-medium">Reports</p>
+</div>
+<div class="pt-4 pb-2">
+<p class="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400">Administration</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-[#92adc9] hover:bg-slate-100 dark:hover:bg-[#233648] transition-colors rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-[#92adc9] hover:bg-slate-100 dark:hover:bg-[#233648] transition-colors rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<p class="text-sm font-medium">Help Center</p>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-[#233648]">
+<div class="flex items-center gap-3 p-2">
+<div class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="User avatar of the admin" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCHFWN7YVXwg6PA3L_Fqy6kFQQ9-oUTTSP55wsAMh8RcK5So7Pps5OJn9Mu1Dv_gfhWokiV5JXqJzljoQxdmZWd_7M_6WYzeMHe9GlVQP1ZsYXVuyGGCUzOyIRUmy8ZbjQJmHbIwXMH5AcK7ditSjC3U_Z42YD3mP9Q3HEGn6yCkwJKMOI7SH6FrWyRvS2TKh7KgvsgP9UMNaY4NNbVdARm7xM1gegoLZL-0Y_gqXXr6tFQmNwzZH0tIxg1N3mj37jDkTZfQ4COYYs");'></div>
+<div class="overflow-hidden">
+<p class="text-sm font-medium truncate">Alex Johnson</p>
+<p class="text-xs text-slate-500 truncate">Pro Account</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<!-- Top Navbar -->
+<header class="h-16 border-b border-slate-200 dark:border-[#233648] bg-white dark:bg-[#111a22] px-8 flex items-center justify-between sticky top-0 z-10">
+<div class="flex items-center gap-6">
+<h2 class="text-lg font-bold">Analytics Dashboard</h2>
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full bg-slate-100 dark:bg-[#233648] border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-slate-400" placeholder="Search data..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 mr-4">
+<div class="size-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<span class="text-xs font-medium text-slate-500 dark:text-[#92adc9]">Live System</span>
+</div>
+<button class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">file_download</span>
+                        Export to Excel
+                    </button>
+<button class="px-4 py-2 bg-slate-100 dark:bg-[#233648] text-slate-700 dark:text-white text-sm font-semibold rounded-lg hover:bg-slate-200 dark:hover:bg-[#324d67] transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+                        Export to PDF
+                    </button>
+<div class="h-8 w-px bg-slate-200 dark:bg-[#233648] mx-2"></div>
+<button class="p-2 text-slate-500 dark:text-[#92adc9] hover:bg-slate-100 dark:hover:bg-[#233648] rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 dark:text-[#92adc9] hover:bg-slate-100 dark:hover:bg-[#233648] rounded-lg">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8 space-y-6">
+<!-- KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-[#111a22] border border-slate-200 dark:border-[#324d67] p-6 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-medium text-slate-500 dark:text-[#92adc9]">MRR</p>
+<span class="p-1.5 bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-md text-xs font-bold">+12.5%</span>
+</div>
+<p class="text-2xl font-bold">$45,200</p>
+<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-[#233648] rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[75%] rounded-full"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#111a22] border border-slate-200 dark:border-[#324d67] p-6 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-medium text-slate-500 dark:text-[#92adc9]">Churn Rate</p>
+<span class="p-1.5 bg-rose-100 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 rounded-md text-xs font-bold">-0.8%</span>
+</div>
+<p class="text-2xl font-bold">2.4%</p>
+<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-[#233648] rounded-full overflow-hidden">
+<div class="h-full bg-rose-500 w-[15%] rounded-full"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#111a22] border border-slate-200 dark:border-[#324d67] p-6 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-medium text-slate-500 dark:text-[#92adc9]">Active Users</p>
+<span class="p-1.5 bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-md text-xs font-bold">+5.2%</span>
+</div>
+<p class="text-2xl font-bold">12,840</p>
+<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-[#233648] rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[62%] rounded-full"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#111a22] border border-slate-200 dark:border-[#324d67] p-6 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-medium text-slate-500 dark:text-[#92adc9]">ARPU</p>
+<span class="p-1.5 bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-md text-xs font-bold">+1.2%</span>
+</div>
+<p class="text-2xl font-bold">$38.50</p>
+<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-[#233648] rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[45%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Main Charts Row -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Revenue Growth Area Chart -->
+<div class="lg:col-span-2 bg-white dark:bg-[#111a22] border border-slate-200 dark:border-[#324d67] p-6 rounded-xl shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-base font-bold">Revenue Growth</h3>
+<p class="text-sm text-slate-500 dark:text-[#92adc9]">Monthly breakdown of platform revenue</p>
+</div>
+<div class="flex items-center gap-2">
+<p class="text-2xl font-bold">$542,400</p>
+<span class="text-xs font-bold text-emerald-500">+18%</span>
+</div>
+</div>
+<div class="h-[240px] w-full relative">
+<!-- Simulated Chart Component -->
+<svg class="w-full h-full" fill="none" preserveaspectratio="none" viewbox="0 0 800 240" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 180C50 160 80 140 120 120C160 100 200 130 250 110C300 90 350 40 400 60C450 80 500 140 550 130C600 120 650 30 700 20C750 10 800 40 800 40V240H0V180Z" fill="url(#chartGradient)"></path>
+<path d="M0 180C50 160 80 140 120 120C160 100 200 130 250 110C300 90 350 40 400 60C450 80 500 140 550 130C600 120 650 30 700 20C750 10 800 40 800 40" stroke="#137fec" stroke-linecap="round" stroke-width="3"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="chartGradient" x1="400" x2="400" y1="0" y2="240">
+<stop stop-color="#137fec" stop-opacity="0.2"></stop>
+<stop offset="1" stop-color="#137fec" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="flex justify-between mt-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+</div>
+</div>
+</div>
+<!-- Customer Segments Doughnut Chart -->
+<div class="bg-white dark:bg-[#111a22] border border-slate-200 dark:border-[#324d67] p-6 rounded-xl shadow-sm flex flex-col">
+<h3 class="text-base font-bold mb-1">Customer Segments</h3>
+<p class="text-sm text-slate-500 dark:text-[#92adc9] mb-6">Current active distribution</p>
+<div class="flex-1 flex flex-col items-center justify-center">
+<div class="relative size-44 mb-6">
+<svg class="size-full" viewbox="0 0 36 36">
+<circle class="stroke-slate-100 dark:stroke-[#233648]" cx="18" cy="18" fill="none" r="16" stroke-width="4"></circle>
+<circle class="stroke-primary" cx="18" cy="18" fill="none" r="16" stroke-dasharray="60 100" stroke-linecap="round" stroke-width="4" transform="rotate(-90 18 18)"></circle>
+<circle class="stroke-emerald-400" cx="18" cy="18" fill="none" r="16" stroke-dasharray="25 100" stroke-dashoffset="-60" stroke-linecap="round" stroke-width="4" transform="rotate(-90 18 18)"></circle>
+<circle class="stroke-orange-400" cx="18" cy="18" fill="none" r="16" stroke-dasharray="15 100" stroke-dashoffset="-85" stroke-linecap="round" stroke-width="4" transform="rotate(-90 18 18)"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center leading-tight">
+<span class="text-2xl font-bold">12.8k</span>
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">Total</span>
+</div>
+</div>
+<div class="w-full grid grid-cols-3 gap-2">
+<div class="text-center">
+<div class="flex items-center justify-center gap-1.5 mb-1">
+<div class="size-2 rounded-full bg-primary"></div>
+<span class="text-[10px] font-bold text-slate-500 dark:text-[#92adc9]">PRO</span>
+</div>
+<p class="text-sm font-bold">60%</p>
+</div>
+<div class="text-center">
+<div class="flex items-center justify-center gap-1.5 mb-1">
+<div class="size-2 rounded-full bg-emerald-400"></div>
+<span class="text-[10px] font-bold text-slate-500 dark:text-[#92adc9]">ENT</span>
+</div>
+<p class="text-sm font-bold">25%</p>
+</div>
+<div class="text-center">
+<div class="flex items-center justify-center gap-1.5 mb-1">
+<div class="size-2 rounded-full bg-orange-400"></div>
+<span class="text-[10px] font-bold text-slate-500 dark:text-[#92adc9]">START</span>
+</div>
+<p class="text-sm font-bold">15%</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Transactions Table -->
+<div class="bg-white dark:bg-[#111a22] border border-slate-200 dark:border-[#324d67] rounded-xl shadow-sm overflow-hidden">
+<div class="px-6 py-5 border-b border-slate-200 dark:border-[#324d67] flex items-center justify-between">
+<h3 class="text-base font-bold">Recent Transactions</h3>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-slate-600 dark:text-[#92adc9] border border-slate-200 dark:border-[#324d67] rounded-lg hover:bg-slate-50 dark:hover:bg-[#233648]">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                                Filter
+                            </button>
+<button class="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-slate-600 dark:text-[#92adc9] border border-slate-200 dark:border-[#324d67] rounded-lg hover:bg-slate-50 dark:hover:bg-[#233648]">
+<span class="material-symbols-outlined text-sm">sort</span>
+                                Sort
+                            </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-[#1a2835] text-slate-500 dark:text-[#92adc9] font-bold">
+<th class="px-6 py-3 border-b border-slate-200 dark:border-[#324d67]">Transaction ID</th>
+<th class="px-6 py-3 border-b border-slate-200 dark:border-[#324d67]">Customer</th>
+<th class="px-6 py-3 border-b border-slate-200 dark:border-[#324d67]">Subscription Plan</th>
+<th class="px-6 py-3 border-b border-slate-200 dark:border-[#324d67]">Amount</th>
+<th class="px-6 py-3 border-b border-slate-200 dark:border-[#324d67]">Status</th>
+<th class="px-6 py-3 border-b border-slate-200 dark:border-[#324d67]">Date</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-[#324d67]">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-[#233648]/30 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-400">#TRX-82910</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-slate-300 dark:bg-slate-600 bg-cover" data-alt="Customer avatar profile image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAwY8cuqSMANOtU8KPr9T_hygd-BlhsPyBv1GUUH9zIkaC1NS67_xE-Rg3s4aLvWnCZlXk14wDk3HNQxk0JAhJfyuzT4UfzY9QmGgZxsUPtGboAck_hacYaV2Hsqe7jNpSYmt9__qsV9P5M8slVMfQiRn15jmSRVN_RFtuHowVIImXxBE-0ZkNQ0haIZH8kJMrUtiwGkJKETGd9ep2mId5g6Wr-l5ElsDQGUzGD_NCUlzy1KICsrUIyYr_acm3sKrjLvEEJbGcS94w");'></div>
+<span class="font-medium">Sarah Jenkins</span>
+</div>
+</td>
+<td class="px-6 py-4">Enterprise Monthly</td>
+<td class="px-6 py-4 font-semibold text-primary">$499.00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">Success</span>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-[#92adc9]">24 Oct 2023</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-[#233648]/30 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-400">#TRX-82909</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-slate-300 dark:bg-slate-600 bg-cover" data-alt="Customer avatar profile image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDBSJ-oS7a4yksdVQAaq-0lh510YX4BEEjXVk-9LcKTAxUskPoDvT79uU2iPA2CNTnNBdWhogCRQujXxOgIvPr3_q-xxqoyuheBi4H2ZIvk4NrB2ByRnyRsZk0KBM5GGrc-w-4eVZga70SUzzt8LWQfHiiuezTLDrb1fQPv0zkZakqEbYeu9t-UuUcMGga1t98ZMBAYoTLmsOwinLdy13x0kooqKi4D6cn2v_tb3fiYnFAc-JiJ1DftywjukvvOsYRKx4UW5QMXnrM");'></div>
+<span class="font-medium">Michael Chen</span>
+</div>
+</td>
+<td class="px-6 py-4">Professional Annual</td>
+<td class="px-6 py-4 font-semibold text-primary">$1,200.00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">Success</span>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-[#92adc9]">24 Oct 2023</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-[#233648]/30 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-400">#TRX-82908</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-slate-300 dark:bg-slate-600 bg-cover" data-alt="Customer avatar profile image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuChsiPDp03DY_JIIRBB3b5QxTCfS4yeTfdL9dcar1jE61R-gQnPbm2SUnSKRcDN8GUgngOet9FmOZGunrrALagq8RocsSkx3Ds8rTtKIjWIEIdl7yA-gu_MtxGGa8Ax4SHo8jGk3EvM9p-uaJjD0QPNY-xyz2bloTg471dqIviprGnaf5sFhjXVzMCs5zPv6hah8FEY5eTJ6dHIYcC4GWgO7rJ37HWR4VFsJI7aMXDncaGUqL0F47lgpKWa9bKOuVsw8x4X288c4o0");'></div>
+<span class="font-medium">Design Systems Ltd</span>
+</div>
+</td>
+<td class="px-6 py-4">Starter Monthly</td>
+<td class="px-6 py-4 font-semibold text-primary">$49.00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-100 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400">Pending</span>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-[#92adc9]">23 Oct 2023</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-[#233648]/30 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-400">#TRX-82907</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-slate-300 dark:bg-slate-600 bg-cover" data-alt="Customer avatar profile image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCOqSir0mS7qCf-ggTBBQOkiWwNglSLyLd-N3eTyg0cMKc8-Qbk6TWihlolblOXwkQh_B8nRPPBR2LMGXML7A4awN5ToEAmeb4Eh0cPdyqqopMrvpKbKqi3SQg6WtEifU7GtK3_Meh5fCrKMoKWWOgV588ULVkEL-NLRa5lHEorGJ7ugWGck47cUK7tOo56XSp176V-HYDCFbYBAGjE6on8bkZLYUSvzrPaGTWP50OfSB62bDH_0ZRLCuyHNJQDzpcMhYSH35_uTJQ");'></div>
+<span class="font-medium">Emily Rodriguez</span>
+</div>
+</td>
+<td class="px-6 py-4">Professional Monthly</td>
+<td class="px-6 py-4 font-semibold text-primary">$149.00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-rose-100 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400">Failed</span>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-[#92adc9]">23 Oct 2023</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 flex items-center justify-between border-t border-slate-200 dark:border-[#324d67]">
+<p class="text-xs text-slate-500 dark:text-[#92adc9]">Showing 1-4 of 128 transactions</p>
+<div class="flex items-center gap-1">
+<button class="p-1 text-slate-400 hover:text-primary transition-colors cursor-not-allowed">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="size-8 rounded bg-primary text-white text-xs font-bold">1</button>
+<button class="size-8 rounded hover:bg-slate-100 dark:hover:bg-[#233648] text-xs font-bold transition-colors">2</button>
+<button class="size-8 rounded hover:bg-slate-100 dark:hover:bg-[#233648] text-xs font-bold transition-colors">3</button>
+<span class="px-2 text-slate-400">...</span>
+<button class="size-8 rounded hover:bg-slate-100 dark:hover:bg-[#233648] text-xs font-bold transition-colors">32</button>
+<button class="p-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-auto p-8 border-t border-slate-200 dark:border-[#233648] text-center text-xs text-slate-400 dark:text-[#92adc9]">
+<p>© 2023 MetricFlow Analytics Platform. All rights reserved.</p>
+</footer>
+</main>
+</div>
+</body></html>

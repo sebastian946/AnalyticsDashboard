@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Real-time Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .glow-blue { filter: drop-shadow(0 0 8px rgba(19, 127, 236, 0.4)); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex">
+<!-- Sidebar Navigation -->
+<aside class="w-64 min-h-screen bg-[#111a22] border-r border-slate-800 flex flex-col justify-between p-4 fixed left-0 top-0 z-50">
+<div class="flex flex-col gap-6">
+<!-- Brand -->
+<div class="flex items-center gap-3 px-2">
+<div class="bg-primary p-2 rounded-lg text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h1 class="text-white text-base font-bold leading-tight">SaaS Metric</h1>
+<p class="text-[#92adc9] text-xs font-normal">Real-time Hub</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary text-white" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-sm font-medium">Detailed Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-medium">Revenue</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">System Settings</span>
+</a>
+</nav>
+</div>
+<!-- Sidebar Bottom -->
+<div class="flex flex-col gap-4">
+<div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700">
+<p class="text-xs text-slate-400 mb-2">Usage Plan</p>
+<div class="h-1.5 w-full bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4"></div>
+</div>
+<p class="text-[10px] text-slate-300 mt-2">75% of Enterprise Plan used</p>
+</div>
+<button class="w-full flex items-center justify-center gap-2 rounded-lg h-10 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+                    Upgrade Now
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen">
+<!-- Header -->
+<header class="flex items-center justify-between border-b border-slate-800 px-8 py-4 bg-[#111a22]/80 backdrop-blur sticky top-0 z-40">
+<div class="flex items-center gap-8">
+<h2 class="text-white text-lg font-bold tracking-tight">Dashboard Overview</h2>
+<label class="relative flex items-center w-80">
+<span class="material-symbols-outlined absolute left-3 text-slate-400">search</span>
+<input class="w-full h-10 rounded-lg border-none bg-slate-800 text-white placeholder:text-slate-500 pl-10 text-sm focus:ring-1 focus:ring-primary" placeholder="Search metrics, users, or data points..."/>
+</label>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-green-500/10 rounded-full border border-green-500/20">
+<div class="size-2 bg-green-500 rounded-full animate-pulse"></div>
+<span class="text-green-500 text-xs font-bold uppercase tracking-wider">Live System</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-800 text-slate-400 hover:text-white transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center gap-2 px-4 h-10 bg-primary rounded-lg text-white text-sm font-bold hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+                            Export
+                        </button>
+<div class="h-10 w-px bg-slate-800 mx-2"></div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-slate-700" data-alt="User avatar for the admin console" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD9NOedCcXDxuLEeT53vH2k6TR04uTL-NoxlVdsIcrRceB2v2k6ul7ORupfv-5uaB-lk0p3tt8nBRPMybAuZk084MTO4YFuYfTeaX-x-oxeczcF4w2UzfnOZqoWh3_upVGHcxYxDg9vPDRbnVBmBCjet5z7UOMM2rvpzqTNkTJFQvzYaRnEqt8kyO0OZ1cTyDALsXdQ6qoe7GG04LVf0tMKtS7hFO_NuVr3oc7pzhYoeKx6G076v1aIdjdtVjGKW5WXLzVxter2Uhk");'></div>
+</div>
+</div>
+</header>
+<!-- Dashboard Body -->
+<div class="p-8 flex flex-col gap-8">
+<!-- KPI Cards Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Revenue -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-slate-800/50 border border-slate-700/50 hover:border-primary/30 transition-all">
+<div class="flex justify-between items-start">
+<p class="text-slate-400 text-sm font-medium">Total Revenue</p>
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<p class="text-white text-3xl font-bold">$42,500.80</p>
+<div class="flex items-center gap-2">
+<span class="text-green-400 text-xs font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> 12.5%
+                            </span>
+<span class="text-slate-500 text-xs">vs last month</span>
+</div>
+</div>
+<!-- Users -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-slate-800/50 border border-slate-700/50 hover:border-primary/30 transition-all">
+<div class="flex justify-between items-start">
+<p class="text-slate-400 text-sm font-medium">Active Users</p>
+<span class="material-symbols-outlined text-primary">group</span>
+</div>
+<p class="text-white text-3xl font-bold">12,840</p>
+<div class="flex items-center gap-2">
+<span class="text-green-400 text-xs font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> 5.2%
+                            </span>
+<span class="text-slate-500 text-xs">live now</span>
+</div>
+</div>
+<!-- Churn -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-slate-800/50 border border-slate-700/50 hover:border-primary/30 transition-all">
+<div class="flex justify-between items-start">
+<p class="text-slate-400 text-sm font-medium">Churn Rate</p>
+<span class="material-symbols-outlined text-orange-400">trending_down</span>
+</div>
+<p class="text-white text-3xl font-bold">2.4%</p>
+<div class="flex items-center gap-2">
+<span class="text-orange-400 text-xs font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_downward</span> 0.8%
+                            </span>
+<span class="text-slate-500 text-xs">lower target</span>
+</div>
+</div>
+<!-- Avg Session -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-slate-800/50 border border-slate-700/50 hover:border-primary/30 transition-all">
+<div class="flex justify-between items-start">
+<p class="text-slate-400 text-sm font-medium">Avg. Session</p>
+<span class="material-symbols-outlined text-primary">timer</span>
+</div>
+<p class="text-white text-3xl font-bold">4m 32s</p>
+<div class="flex items-center gap-2">
+<span class="text-green-400 text-xs font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> 1.5%
+                            </span>
+<span class="text-slate-500 text-xs">engagement up</span>
+</div>
+</div>
+</div>
+<!-- Main Chart Area -->
+<div class="rounded-xl bg-slate-800/30 border border-slate-800 p-6">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-white text-lg font-bold">Traffic Sources Over Time</h3>
+<p class="text-slate-500 text-sm">Daily visitor breakdown per channel</p>
+</div>
+<div class="flex bg-slate-800 rounded-lg p-1">
+<button class="px-3 py-1 text-xs font-bold text-white bg-slate-700 rounded shadow-sm">24h</button>
+<button class="px-3 py-1 text-xs font-bold text-slate-400 hover:text-white transition-all">7d</button>
+<button class="px-3 py-1 text-xs font-bold text-slate-400 hover:text-white transition-all">30d</button>
+</div>
+</div>
+<div class="w-full flex flex-col gap-6">
+<div class="relative h-[300px] w-full">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+<!-- Area Gradient -->
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#137fec" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#137fec" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Lines -->
+<line stroke="#1e293b" stroke-width="1" x1="0" x2="1000" y1="50" y2="50"></line>
+<line stroke="#1e293b" stroke-width="1" x1="0" x2="1000" y1="125" y2="125"></line>
+<line stroke="#1e293b" stroke-width="1" x1="0" x2="1000" y1="200" y2="200"></line>
+<line stroke="#1e293b" stroke-width="1" x1="0" x2="1000" y1="275" y2="275"></line>
+<!-- Main Data Path -->
+<path d="M0,250 C100,220 150,280 250,180 C350,80 450,150 550,120 C650,90 750,220 850,200 C950,180 1000,50 1000,50 L1000,300 L0,300 Z" fill="url(#chartGradient)"></path>
+<path class="glow-blue" d="M0,250 C100,220 150,280 250,180 C350,80 450,150 550,120 C650,90 750,220 850,200 C950,180 1000,50 1000,50" fill="none" stroke="#137fec" stroke-width="3"></path>
+</svg>
+<!-- Data Point Tooltip Mockup -->
+<div class="absolute left-1/2 top-1/4 -translate-x-1/2 -translate-y-1/2 glass-card border border-slate-700 p-3 rounded-lg shadow-2xl pointer-events-none">
+<p class="text-[10px] text-slate-400 font-bold uppercase mb-1">Organic Search</p>
+<p class="text-white font-bold">14,204 Visits</p>
+<p class="text-green-400 text-[10px]">+18.2% vs avg.</p>
+</div>
+</div>
+<div class="flex justify-between items-center px-2">
+<span class="text-slate-500 text-xs font-bold">00:00</span>
+<span class="text-slate-500 text-xs font-bold">04:00</span>
+<span class="text-slate-500 text-xs font-bold">08:00</span>
+<span class="text-slate-500 text-xs font-bold">12:00</span>
+<span class="text-slate-500 text-xs font-bold">16:00</span>
+<span class="text-slate-500 text-xs font-bold">20:00</span>
+<span class="text-slate-500 text-xs font-bold">23:59</span>
+</div>
+</div>
+</div>
+<!-- User Management Table Section -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-end px-4">
+<h3 class="text-white text-xl font-bold">User Management</h3>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-3 py-2 bg-slate-800 text-white rounded-lg text-sm border border-slate-700 hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined text-sm">filter_alt</span>
+                                Filters
+                            </button>
+<button class="flex items-center gap-2 px-3 py-2 bg-slate-800 text-white rounded-lg text-sm border border-slate-700 hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined text-sm">sort</span>
+                                Sort
+                            </button>
+</div>
+</div>
+<div class="overflow-x-auto rounded-xl border border-slate-800 bg-[#111a22]">
+<table class="w-full text-left border-collapse">
+<thead class="bg-slate-800/50">
+<tr>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">User</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">Plan</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">Last Active</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-800">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">JS</div>
+<div>
+<p class="text-sm font-bold text-white">Jordan Smith</p>
+<p class="text-xs text-slate-500">jordan@acme.corp</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-purple-500/10 text-purple-400 text-[10px] font-bold rounded border border-purple-500/20 uppercase tracking-widest">Enterprise</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-2 bg-green-500 rounded-full"></div>
+<span class="text-xs text-slate-300">Active</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">2 mins ago</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-500 hover:text-white transition-all"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-slate-700 flex items-center justify-center text-white font-bold">AL</div>
+<div>
+<p class="text-sm font-bold text-white">Alice Lawson</p>
+<p class="text-xs text-slate-500">alice@lawson.design</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-blue-500/10 text-blue-400 text-[10px] font-bold rounded border border-blue-500/20 uppercase tracking-widest">Professional</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-2 bg-green-500 rounded-full"></div>
+<span class="text-xs text-slate-300">Active</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">14 hours ago</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-500 hover:text-white transition-all"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-slate-700 flex items-center justify-center text-white font-bold">RB</div>
+<div>
+<p class="text-sm font-bold text-white">Robert Brown</p>
+<p class="text-xs text-slate-500">robert@stack.io</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-500/10 text-slate-400 text-[10px] font-bold rounded border border-slate-500/20 uppercase tracking-widest">Starter</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-2 bg-slate-500 rounded-full"></div>
+<span class="text-xs text-slate-500">Idle</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">2 days ago</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-500 hover:text-white transition-all"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-red-500/20 flex items-center justify-center text-red-500 font-bold">EM</div>
+<div>
+<p class="text-sm font-bold text-white">Elena Miller</p>
+<p class="text-xs text-slate-500">elena@miller.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-blue-500/10 text-blue-400 text-[10px] font-bold rounded border border-blue-500/20 uppercase tracking-widest">Professional</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-2 bg-red-500 rounded-full"></div>
+<span class="text-xs text-slate-300">Suspended</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">3 weeks ago</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-500 hover:text-white transition-all"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="flex items-center justify-between px-6 py-4 border-t border-slate-800 bg-slate-800/20">
+<p class="text-xs text-slate-500">Showing 1-10 of 1,284 users</p>
+<div class="flex gap-2">
+<button class="p-1.5 rounded bg-slate-800 text-slate-400 hover:text-white disabled:opacity-50">
+<span class="material-symbols-outlined text-base">chevron_left</span>
+</button>
+<button class="p-1.5 rounded bg-slate-800 text-slate-400 hover:text-white">
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
