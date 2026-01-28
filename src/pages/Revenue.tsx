@@ -34,7 +34,7 @@ export const Revenue = () => {
       header: 'CUSTOMER',
       render: (name: string) => (
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xs font-semibold">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary-700 flex items-center justify-center text-white text-xs font-semibold">
             {name.split(' ').map(n => n[0]).join('')}
           </div>
           <span className="text-sm font-medium text-slate-900 dark:text-white">{name}</span>

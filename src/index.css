@@ -3,6 +3,7 @@
 /* Asegurar mejor contraste en modo light */
 body {
   color: #1e293b; /* slate-900 para mejor legibilidad en light mode */
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Mejoras para modo light */
@@ -12,4 +13,11 @@ body {
 
 .dark {
   color-scheme: dark;
+}
+
+/* Smooth transitions para cambios de color */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
 }

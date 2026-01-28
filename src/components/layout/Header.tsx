@@ -47,7 +47,7 @@ export const Header = ({ title = 'Dashboard Overview', showExport = true, onExpo
         <ThemeToggle />
 
         {/* User Avatar */}
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center text-white font-semibold text-sm">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-600 flex items-center justify-center text-white font-semibold text-sm">
           JD
         </div>
       </div>

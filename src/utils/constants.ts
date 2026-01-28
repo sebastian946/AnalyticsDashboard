@@ -50,11 +50,11 @@ export const TRANSACTION_STATUS_COLORS = {
 } as const
 
 export const CHART_COLORS = {
-  primary: '#137fec',
+  primary: '#8B5CF6',
   success: '#10b981',
   warning: '#f59e0b',
   danger: '#ef4444',
-  purple: '#a855f7',
+  purple: '#8B5CF6',
   blue: '#3b82f6',
   green: '#10b981',
   orange: '#f97316',

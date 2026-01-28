@@ -6,7 +6,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#137fec',
+        primary: {
+          DEFAULT: '#8B5CF6',
+          50: '#F5F3FF',
+          100: '#EDE9FE',
+          200: '#DDD6FE',
+          300: '#C4B5FD',
+          400: '#A78BFA',
+          500: '#8B5CF6',
+          600: '#7C3AED',
+          700: '#6D28D9',
+          800: '#5B21B6',
+          900: '#4C1D95',
+        },
         'background-light': '#f6f7f8',
         'background-dark': '#101922',
         'dark-surface': '#111a22',
@@ -14,7 +26,8 @@ export default {
         'dark-hover': '#324d67',
       },
       fontFamily: {
-        display: ['Inter', 'sans-serif'],
+        display: ['Poppins', 'sans-serif'],
+        sans: ['Poppins', 'sans-serif'],
       },
       borderRadius: {
         DEFAULT: '0.25rem',

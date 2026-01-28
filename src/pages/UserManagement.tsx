@@ -28,7 +28,7 @@ export const UserManagement = () => {
       header: 'USER',
       render: (_, user) => (
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center text-white font-semibold text-sm">
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-600 flex items-center justify-center text-white font-semibold text-sm">
             {user.initials}
           </div>
           <div>
