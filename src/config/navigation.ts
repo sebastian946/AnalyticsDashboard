@@ -51,7 +51,7 @@ export const navigationItems: NavigationItem[] = [
     id: 'reports',
     label: 'Reports',
     icon: FileText,
-    path: '/reports',
+    path: routes.reports,
     section: 'main',
   },
 ]

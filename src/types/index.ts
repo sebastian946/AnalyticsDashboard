@@ -27,3 +27,9 @@ export type {
   NotificationType,
   Notification,
 } from './notification'
+
+export type {
+  ReportType,
+  ReportStatus,
+  Report,
+} from './report'

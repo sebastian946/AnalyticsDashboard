@@ -5,6 +5,7 @@ import { Dashboard } from "@/pages/Dashboard";
 import { DetailedAnalytics } from "@/pages/DetailedAnalytics";
 import { UserManagement } from "@/pages/UserManagement";
 import { Revenue } from "@/pages/Revenue";
+import { Reports } from "@/pages/Reports";
 import { Settings } from "@/pages/Settings";
 import { routes } from "@/config/routes";
 
@@ -42,6 +43,14 @@ function App() {
             element={
               <MainLayout title="Revenue" showExport={false}>
                 <Revenue />
+              </MainLayout>
+            }
+          />
+          <Route
+            path={routes.reports}
+            element={
+              <MainLayout title="Reports" showExport={false}>
+                <Reports />
               </MainLayout>
             }
           />

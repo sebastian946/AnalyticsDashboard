@@ -1,15 +1,27 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card'
-import { ThemeToggle } from '@/components/ui/ThemeToggle'
-import { useTheme } from '@/hooks/useTheme'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/Card";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { useTheme } from "@/hooks/useTheme";
 
 export const Settings = () => {
-  const { theme } = useTheme()
+  const { theme, isDark } = useTheme();
 
   return (
     <div className="space-y-6 max-w-4xl">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Settings</h1>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+        <h1
+          className={`text-2xl font-bold  ${isDark ? "text-slate-100" : "text-slate-900"}`}
+        >
+          Settings
+        </h1>
+        <p
+          className={`text-sm text-slate-600 dark:text-slate-400 mt-1 ${isDark ? "text-slate-600" : "text-slate-200"}`}
+        >
           Manage your dashboard preferences
         </p>
       </div>
@@ -17,14 +29,19 @@ export const Settings = () => {
       <Card>
         <CardHeader>
           <CardTitle>Appearance</CardTitle>
-          <CardDescription>Customize the look and feel of your dashboard</CardDescription>
+          <CardDescription>
+            Customize the look and feel of your dashboard
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-medium text-slate-900 dark:text-white">Theme</p>
+              <p className="font-medium text-slate-900 dark:text-white">
+                Theme
+              </p>
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Current theme: <span className="capitalize font-medium">{theme}</span>
+                Current theme:{" "}
+                <span className="capitalize font-medium">{theme}</span>
               </p>
             </div>
             <ThemeToggle />
@@ -56,5 +73,5 @@ export const Settings = () => {
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};

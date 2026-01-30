@@ -6,6 +6,7 @@ import type {
   Transaction,
   TimeRange,
   CustomerSegment,
+  Report,
 } from '@/types'
 
 // Helper to generate realistic time-series data
@@ -317,5 +318,122 @@ export const getTransactions = (
   return {
     transactions: allTransactions.slice((page - 1) * limit, page * limit),
     total: allTransactions.length,
+  }
+}
+
+// Mock Reports
+export const getReports = (
+  page: number = 1,
+  limit: number = 10
+): { reports: Report[]; total: number } => {
+  const allReports: Report[] = [
+    {
+      id: '1',
+      reportId: '#RPT-00245',
+      title: 'Monthly Revenue Report',
+      type: 'revenue',
+      status: 'generated',
+      generatedBy: 'Sarah Jenkins',
+      dateRange: {
+        from: new Date('2023-10-01'),
+        to: new Date('2023-10-31'),
+      },
+      metrics: {
+        totalRevenue: 42500.8,
+        growth: 12.5,
+      },
+      generatedAt: new Date('2023-10-31T14:30:00'),
+    },
+    {
+      id: '2',
+      reportId: '#RPT-00244',
+      title: 'User Growth Analytics',
+      type: 'users',
+      status: 'generated',
+      generatedBy: 'Michael Chen',
+      dateRange: {
+        from: new Date('2023-09-01'),
+        to: new Date('2023-09-30'),
+      },
+      metrics: {
+        totalUsers: 12840,
+        growth: 8.3,
+      },
+      generatedAt: new Date('2023-10-30T10:15:00'),
+    },
+    {
+      id: '3',
+      reportId: '#RPT-00243',
+      title: 'Quarterly Performance Review',
+      type: 'performance',
+      status: 'processing',
+      generatedBy: 'Emma Wilson',
+      dateRange: {
+        from: new Date('2023-07-01'),
+        to: new Date('2023-09-30'),
+      },
+      metrics: {
+        totalRevenue: 118200.0,
+        totalUsers: 11500,
+        growth: 15.7,
+      },
+      generatedAt: new Date('2023-10-29T16:45:00'),
+    },
+    {
+      id: '4',
+      reportId: '#RPT-00242',
+      title: 'User Engagement Metrics',
+      type: 'engagement',
+      status: 'generated',
+      generatedBy: 'David Martinez',
+      dateRange: {
+        from: new Date('2023-10-15'),
+        to: new Date('2023-10-22'),
+      },
+      metrics: {
+        engagement: 78.5,
+        totalUsers: 10200,
+      },
+      generatedAt: new Date('2023-10-28T09:20:00'),
+    },
+    {
+      id: '5',
+      reportId: '#RPT-00241',
+      title: 'Weekly Revenue Summary',
+      type: 'revenue',
+      status: 'scheduled',
+      generatedBy: 'Lisa Wang',
+      dateRange: {
+        from: new Date('2023-10-23'),
+        to: new Date('2023-10-30'),
+      },
+      metrics: {
+        totalRevenue: 9800.5,
+        growth: 4.2,
+      },
+      generatedAt: new Date('2023-10-27T11:00:00'),
+    },
+    {
+      id: '6',
+      reportId: '#RPT-00240',
+      title: 'Annual User Retention Report',
+      type: 'users',
+      status: 'generated',
+      generatedBy: 'Tom Anderson',
+      dateRange: {
+        from: new Date('2022-11-01'),
+        to: new Date('2023-10-31'),
+      },
+      metrics: {
+        totalUsers: 45000,
+        growth: 22.4,
+      },
+      generatedAt: new Date('2023-10-26T14:10:00'),
+    },
+  ]
+
+  return {
+    reports: allReports.slice((page - 1) * limit, page * limit),
+    total: allReports.length,
   }
 }

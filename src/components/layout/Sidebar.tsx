@@ -93,8 +93,12 @@ export const Sidebar = () => {
             75% of Enterprise Plan used
           </p>
         </div>
-        <Button variant="primary" size="md" className="w-full">
-          <Rocket className="w-4 h-4" />
+        <Button
+          variant="primary"
+          size="md"
+          className="w-full bg-blue-500 hover:bg-blue-600"
+        >
+          <Rocket className="w-4 h-4" color="white" />
           Upgrade Now
         </Button>
       </div>
