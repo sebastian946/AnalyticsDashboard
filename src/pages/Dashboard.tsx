@@ -1,49 +1,61 @@
-import { useEffect } from 'react'
-import { useDashboardStore, useUserStore } from '@/store'
-import { getUsers } from '@/services/mockData'
-import { KPICard } from '@/components/dashboard/KPICard'
-import { ChartCard } from '@/components/charts/ChartCard'
-import { AreaChart } from '@/components/charts/AreaChart'
-import { DataTable, type Column } from '@/components/tables/DataTable'
-import { Pagination } from '@/components/tables/Pagination'
-import { TableFilters } from '@/components/tables/TableFilters'
-import { Badge } from '@/components/ui/Badge'
-import type { User } from '@/types'
-import { formatRelativeTime } from '@/utils/formatters'
-import { PLAN_COLORS, STATUS_COLORS } from '@/utils/constants'
+import { useEffect } from "react";
+import { useDashboardStore, useUserStore } from "@/store";
+import { getUsers } from "@/services/mockData";
+import { KPICard } from "@/components/dashboard/KPICard";
+import { ChartCard } from "@/components/charts/ChartCard";
+import { AreaChart } from "@/components/charts/AreaChart";
+import { DataTable, type Column } from "@/components/tables/DataTable";
+import { Pagination } from "@/components/tables/Pagination";
+import { TableFilters } from "@/components/tables/TableFilters";
+import { Badge } from "@/components/ui/Badge";
+import type { User } from "@/types";
+import { formatRelativeTime } from "@/utils/formatters";
+import { PLAN_COLORS, STATUS_COLORS } from "@/utils/constants";
+import { useTheme } from "@/hooks/useTheme";
 
 export const Dashboard = () => {
-  const { kpiMetrics, chartData, timeRange, setTimeRange, refreshData, isLoading } = useDashboardStore()
-  const { setUsers, currentPage, setPage, getFilteredUsers } = useUserStore()
+  const {
+    kpiMetrics,
+    chartData,
+    timeRange,
+    setTimeRange,
+    refreshData,
+    isLoading,
+  } = useDashboardStore();
+  const { setUsers, currentPage, setPage, getFilteredUsers } = useUserStore();
 
   useEffect(() => {
-    refreshData()
-    const { users: fetchedUsers } = getUsers(1, 10)
-    setUsers(fetchedUsers)
-  }, [])
+    refreshData();
+    const { users: fetchedUsers } = getUsers(1, 10);
+    setUsers(fetchedUsers);
+  }, []);
 
-  const filteredUsers = getFilteredUsers()
-  const totalPages = Math.ceil(filteredUsers.length / 10)
+  const filteredUsers = getFilteredUsers();
+  const totalPages = Math.ceil(filteredUsers.length / 10);
 
   const userColumns: Column<User>[] = [
     {
-      key: 'name',
-      header: 'USER',
+      key: "name",
+      header: "USER",
       render: (_, user) => (
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-600 flex items-center justify-center text-white font-semibold text-sm">
             {user.initials}
           </div>
           <div>
-            <p className="font-medium text-slate-900 dark:text-white">{user.name}</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">{user.email}</p>
+            <p className="font-medium text-slate-900 dark:text-white">
+              {user.name}
+            </p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              {user.email}
+            </p>
           </div>
         </div>
       ),
     },
     {
-      key: 'plan',
-      header: 'PLAN',
+      key: "plan",
+      header: "PLAN",
       render: (plan: string) => (
         <Badge
           className={`${PLAN_COLORS[plan as keyof typeof PLAN_COLORS]?.bg} ${PLAN_COLORS[plan as keyof typeof PLAN_COLORS]?.text} uppercase`}
@@ -53,20 +65,24 @@ export const Dashboard = () => {
       ),
     },
     {
-      key: 'status',
-      header: 'STATUS',
+      key: "status",
+      header: "STATUS",
       render: (status: string) => (
         <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full ${STATUS_COLORS[status as keyof typeof STATUS_COLORS]?.dot}`}></div>
-          <span className={`text-sm capitalize ${STATUS_COLORS[status as keyof typeof STATUS_COLORS]?.text}`}>
+          <div
+            className={`w-2 h-2 rounded-full ${STATUS_COLORS[status as keyof typeof STATUS_COLORS]?.dot}`}
+          ></div>
+          <span
+            className={`text-sm capitalize ${STATUS_COLORS[status as keyof typeof STATUS_COLORS]?.text}`}
+          >
             {status}
           </span>
         </div>
       ),
     },
     {
-      key: 'lastActive',
-      header: 'LAST ACTIVE',
+      key: "lastActive",
+      header: "LAST ACTIVE",
       render: (date: Date) => (
         <span className="text-sm text-slate-600 dark:text-slate-400">
           {formatRelativeTime(date)}
@@ -74,8 +90,8 @@ export const Dashboard = () => {
       ),
     },
     {
-      key: 'id',
-      header: 'ACTIONS',
+      key: "id",
+      header: "ACTIONS",
       render: () => (
         <button className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -86,8 +102,8 @@ export const Dashboard = () => {
         </button>
       ),
     },
-  ]
-
+  ];
+  const { isDark } = useTheme();
   return (
     <div className="space-y-8">
       {/* KPI Metrics Grid */}
@@ -112,11 +128,18 @@ export const Dashboard = () => {
       {/* User Management Table */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white">User Management</h3>
+          <h3
+            className={`text-xl font-bold ${isDark ? "text-slate-100" : "text-slate-900"}`}
+          >
+            User Management
+          </h3>
           <TableFilters />
         </div>
 
-        <DataTable data={filteredUsers.slice((currentPage - 1) * 10, currentPage * 10)} columns={userColumns} />
+        <DataTable
+          data={filteredUsers.slice((currentPage - 1) * 10, currentPage * 10)}
+          columns={userColumns}
+        />
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -126,5 +149,5 @@ export const Dashboard = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};

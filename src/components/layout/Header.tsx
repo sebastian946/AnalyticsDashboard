@@ -18,9 +18,7 @@ export const Header = ({
   return (
     <header className="flex items-center justify-between border-b border-slate-100 dark:border-slate-600 px-8 py-4 bg-slate-50 dark:bg-slate-700 backdrop-blur sticky top-0 z-40">
       <div className="flex items-center gap-8">
-        <h2 className="text-slate-900 dark:text-white text-lg font-bold tracking-tight">
-          {title}
-        </h2>
+        <h2 className={`text-lg font-bold tracking-tight`}>{title}</h2>
         <SearchBar
           placeholder="Search metrics, users, or data points..."
           className="w-80"
@@ -56,7 +54,7 @@ export const Header = ({
         <ThemeToggle />
 
         {/* User Avatar */}
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-600 flex items-center justify-center text-white font-semibold text-sm">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-600 flex items-center justify-center font-semibold text-sm text-slate-900">
           JD
         </div>
       </div>
